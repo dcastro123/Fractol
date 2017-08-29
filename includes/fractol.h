@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 18:06:07 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/08/28 20:50:22 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/08/28 21:27:06 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@
 typedef struct			s_env
 {
 	char	*name;
+	int	x;
 	void	*mlx;
 	void	*win;
 }						t_env;
 
+int			key_hooks(int keycode, t_env *e);
+int			my_key_funct(int keycode);
 #endif

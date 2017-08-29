@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 21:20:46 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/08/28 20:51:22 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/08/28 21:26:42 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static	void	get_opt(char s, t_env *e)
 static	void	setup_env(t_env *e)
 {
 	e->mlx = mlx_init();
-	e->win = mlx_new_window(e->mlx, e->win, WINDOW_W, WINDOW_H);
+	e->win = mlx_new_window(e->mlx, WINDOW_W, WINDOW_H, e->name);
 }
 
 static	void	controls(void)
@@ -45,6 +45,7 @@ static	void	controls(void)
 	ft_putendl("Increase/Decrease Iteration: Up Arrow/Down Arrow\n");
 	ft_putendl("Add/Remove color: z/c\n");
 }
+
 int	main(int ac, char **av)
 {
 	t_env *e;
@@ -61,11 +62,11 @@ int	main(int ac, char **av)
 			display_opts();
 			return (0);
 		}
-		//setup_env(e);
+		setup_env(e);
 		controls();
 		//draw(e);
 		mlx_key_hook(e->win, key_hooks, e);
-		mlx_mouse_hook(e->win, mouse_hooks, e);
+//		mlx_mouse_hook(e->win, mouse_hooks, e);
 		mlx_loop(e->mlx);
 	}
 	return (0);
