@@ -6,18 +6,20 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 21:20:46 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/08/25 19:44:25 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/08/28 20:51:22 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
+
 
 static void	display_opts(void)
 {
 	ft_putendl("Usage: ./fractol [option number]");
 	ft_putstr("Valid Options:\n\
 		1: Julia\n\
-		2: Mandlebrot\n");
+		2: Mandlebrot\n\
+		3. WIP\n");
 }
 
 static	void	get_opt(char s, t_env *e)
@@ -26,15 +28,22 @@ static	void	get_opt(char s, t_env *e)
 		e->name = ft_strdup("Julia");
 	else if (s == '2')
 		e->name = ft_strdup("Mandlebrot");
+	else if (s == '3')
+		e->name = ft_strdup("WIP");
+}
+
+static	void	setup_env(t_env *e)
+{
+	e->mlx = mlx_init();
+	e->win = mlx_new_window(e->mlx, e->win, WINDOW_W, WINDOW_H);
 }
 
 static	void	controls(void)
 {
-	ft_putendl("CONTROLS:");
-	ft_putendl("Move: W: up A: left S: down D: right")
-	ft_putendl("Zoom In/Out: Mousewheel Up/Down");
-	ft_putendl("Increase/Decrease Iteration: Up Arrow/Down Arrow");
-	ft_putendl("Add/Remove color: z/c");
+	ft_putendl("CONTROLS:\n");
+	ft_putendl("Zoom In/Out: Mousewheel Up/Down\n");
+	ft_putendl("Increase/Decrease Iteration: Up Arrow/Down Arrow\n");
+	ft_putendl("Add/Remove color: z/c\n");
 }
 int	main(int ac, char **av)
 {
@@ -55,6 +64,9 @@ int	main(int ac, char **av)
 		//setup_env(e);
 		controls();
 		//draw(e);
+		mlx_key_hook(e->win, key_hooks, e);
+		mlx_mouse_hook(e->win, mouse_hooks, e);
+		mlx_loop(e->mlx);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 18:06:07 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/08/25 19:55:49 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/08/28 20:50:22 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define WINDOW_H	768
 # define WINDOW_W	1366
-# define zoom		1
+# define zoom		1.1
 
 # define K_UP  		126
 # define K_DWN 		125
