@@ -15,3 +15,17 @@
 /**
 *	Formula for drawing the Mandlebrot set of Fractals
 **/
+/*
+** z.r = 0;
+z.i = 0;
+zrsqr = z.r * z.r;
+zisqr = z.i * z.i;
+while (zrsqr + zisqr <= 4.0)
+{
+z.i = square(z.r + z.i) – zrsqr – zisqr;
+z.i += c.i;
+z.r = zrsqr – zisqr + c.r;
+zrsqr = square(z.r);
+zisqr = square(z.i);
+}
+*/
