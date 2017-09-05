@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 17:51:47 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 19:24:20 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 20:01:13 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,17 @@ static	int	calc_iters(t_env *e, int row, int col)
 	}
 	return (i);
 }
+
 /**
 *	Formula for drawing the Mandlebrot set of Fractals
 **/
+
 void	draw_mandle(t_env *e)
 {
 	int	i;
 	int	row;
 	int	col;
+//	t_rgb	color;
 
 	row = -1;
 	col = -1;
@@ -52,20 +55,10 @@ void	draw_mandle(t_env *e)
 		while(++col < WINDOW_W)
 		{
 			i = calc_iters(e, row, col);
-			if (i < e->max)
-				mlx_pixel_put(e->mlx, e->win, col, row, BLACK);
+			if (i == e->max)
+				mlx_pixel_put(e->mlx, e->win, col, row, WHITE);
 			else
-				mlx_pixel_put(e->mlx, e->win, col, row, WHITE); 
+				mlx_pixel_put(e->mlx, e->win, col, row, mlx_get_color_value(e->mlx, (265 * i))); 
 		}
 	}
 }
-
-// void	mandle(t_env *e)
-// {
-
-
-
-
-
-
-// }

@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 17:51:38 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 19:08:47 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 20:01:48 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ static	int	calc_iters(t_env *e, int row, int col)
 	}
 	return (i);
 }
+
 /**
 *	Formula for drawing the Julia set of Fractals
 **/
+
 void	draw_julia(t_env *e)
 {
 	int	i;
@@ -53,10 +55,10 @@ void	draw_julia(t_env *e)
 		while(++col < WINDOW_W)
 		{
 			i = calc_iters(e, row, col);
-			if (i < e->max)
-				mlx_pixel_put(e->mlx, e->win, col, row, BLACK);
+			if (i == e->max)
+				mlx_pixel_put(e->mlx, e->win, col, row, WHITE);
 			else
-				mlx_pixel_put(e->mlx, e->win, col, row, WHITE); 
+				mlx_pixel_put(e->mlx, e->win, col, row, mlx_get_color_value(e->mlx, (265 * i))); 
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 18:06:07 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 19:22:26 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 19:35:09 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,15 @@ typedef struct			s_env
 	double	cr;
 	int		xtrans;
 	int		ytrans;
+	int		scale;
 }						t_env;
+
+typedef	struct 			s_rgb 
+{
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+}						t_rgb;
 
 int			key_hooks(int keycode, t_env *e);
 int			my_key_funct(int keycode);

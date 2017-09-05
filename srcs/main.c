@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 21:20:46 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 18:58:49 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 20:01:36 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static	void	setup_env(t_env *e)
 	e->cr = 0.0;
 	e->xtrans = 0;
 	e->ytrans = 0;
+	e->scale = 0;
 }
 
 static	void	controls(void)
