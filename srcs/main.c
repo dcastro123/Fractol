@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 21:20:46 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/01 16:43:53 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 18:58:49 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int ac, char **av)
 		}
 		setup_env(e);
 		controls();
-		draw_mandle(e);
+		draw_julia(e);
 		mlx_key_hook(e->win, key_hooks, e);
 //		mlx_mouse_hook(e->win, mouse_hooks, e);
 		mlx_loop(e->mlx);

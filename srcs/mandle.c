@@ -6,21 +6,15 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 17:51:47 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/01 16:59:47 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 18:59:39 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-// static	void	colors(t_env *e)
+// static	void	colors(t_env *e, int i)
 // {
-// 	int	i;
 
-// 	e->colors = (int*)ft_memalloc(e->max);
-// 	while (i < max)
-// 	{
-// 		e->colors[i] = 
-// 	}
 // }
 
 static	int	calc_iters(t_env *e, int row, int col)

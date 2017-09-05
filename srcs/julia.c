@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 17:51:38 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/01 17:00:08 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 19:08:47 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,25 @@
 
 static	int	calc_iters(t_env *e, int row, int col)
 {
-	double	zrsqr;
-	double	zisqr;
+	double	re_temp;
+	double	i_temp;
 	int		i;
 
-	e->zi = 0;
-	e->zr = 0;
-	zrsqr = SQR(e->zr);
-	zisqr = SQR(e->zi);
-	e->cr = (col - WINDOW_W / 2.0) * 4.0 / WINDOW_W + e->xtrans;
-	e->ci = (row - WINDOW_H / 2.0) * 4.0 / WINDOW_W + e->ytrans;
+	e->zi = (row - WINDOW_H / 2) / (0.5 * ZOOM * row) + e->ytrans;
+	e->zr =  1.5 * (col - WINDOW_W / 2) / (0.5 * ZOOM * col) + e->xtrans;
+	re_temp = 0;
+	i_temp = 0;
+	e->cr = -0.7;
+	e->ci = 0.27015;
 	i = -1;
-	while (zrsqr + zisqr <= 4.0 && ++i < e->max)
+	while (++i < e->max)
 	{
-		e->zi = (e->zr + e->zi)  * (e->zr + e->zi) - zrsqr - zisqr;
-		e->zi += e->ci;
-		e->zr = (zrsqr - zisqr) + e->cr;
-		zrsqr = SQR(e->zr);
-		zisqr = SQR(e->zi);
+		re_temp = e->zr;
+		i_temp = e->zi;
+		e->zi = 2 * (i_temp * re_temp) + e->ci;
+		e->zr = SQR(re_temp) - SQR(i_temp) + e->cr;
+		if (SQR(e->zr) + SQR(e->zi) > 4)
+			break ;
 	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 18:06:07 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/01 16:43:41 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 18:59:29 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define WINDOW_H	1000
 # define WINDOW_W	1000
-# define zoom		1.1
+# define ZOOM		1
 # define SQR(x)		(x * x)
 
 # define K_UP  		126
@@ -39,6 +39,7 @@
 
 # define WHITE		0xf8f8ff
 # define BLACK		0x0
+
 typedef struct			s_env
 {
 	char	*name;
@@ -46,7 +47,7 @@ typedef struct			s_env
 	void	*mlx;
 	void	*win;
 	int		max;
-	int		*colors;
+	char		*colors;
 	double	zr;
 	double	zi;
 	double	ci;
@@ -59,4 +60,5 @@ int			key_hooks(int keycode, t_env *e);
 int			my_key_funct(int keycode);
 
 void	draw_mandle(t_env *e);
+void	draw_julia(t_env *e);
 #endif
