@@ -34,8 +34,10 @@ int			key_hooks(int keycode, t_env *e)
 {
 	if (keycode == 53)
 		exit(0);
-	ft_putstr("keycode: ");
-	ft_putendl(ft_itoa(keycode));
-	e->x = 0;
+	else if (keycode == 69)
+		e->max++;
+	else if (keycode == 78)
+		e->max--;
+	//draw_fract(e->name);
 	return (0);
 }
