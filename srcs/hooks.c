@@ -11,24 +11,41 @@
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-
-int			my_key_funct(int keycode)
+/*
+static	int		julia_mouse_hook(int x, int y, int keycode, t_env *e)
 {
-	ft_putstr("Key Event: ");
-	ft_putendl(ft_itoa(keycode));
-	if (keycode == 53)
-		exit(0);
-	return (0);
+	
+	
+	
+}
+*/
+static	void		zoom_out(int x, int y, int keycode, t_env *e)
+{
+	e->zoom /= .70;
+	e->xtrans -= ((x-(WINDOW_W / 2)) / ((WINDOW_W / 2) / e->zoom) *2);
+	e->ytrans -=  ((y - (WINDOW_H / 2)) / ((WINDOW_H / 2) / e->zoom) *\
+		       ( 2 * WINDOW_H / WINDOW_W));
+	e->max++;
+}
+	
+static	void		zoom_in(int x, int y, int keycode, t_env *e)
+{
+	e->zoom *= .70;
+	e->xtrans += ((x-(WINDOW_W / 2)) / ((WINDOW_W / 2) / e->zoom) *2);
+	e->ytrans +=  ((y - (WINDOW_H / 2)) / ((WINDOW_H / 2) / e->zoom) *\
+		       ( 2 * WINDOW_H / WINDOW_W));
+	e->max++;
 }
 
-// int			mouse_hooks(int keycode, t_env *e)
-// {
-
-
-
-
-// 	return (0);
-// }
+int			mouse_hooks(int x, int y, int keycode, t_env *e)
+{
+	if (keycode == 4)
+		zoom_in(x, y, keycode, e);
+	else if (keycode == 5)
+		zoom_out(x ,y keycode, e);
+	//draw_fract(e->name);
+ 	return (0);
+}
 
 int			key_hooks(int keycode, t_env *e)
 {
