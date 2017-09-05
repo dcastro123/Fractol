@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 18:06:07 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 18:59:29 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 19:22:26 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct			s_env
 	void	*mlx;
 	void	*win;
 	int		max;
-	char		*colors;
 	double	zr;
 	double	zi;
 	double	ci;
