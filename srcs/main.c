@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 21:20:46 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 20:01:36 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 21:03:16 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static	void	setup_env(t_env *e)
 {
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WINDOW_W, WINDOW_H, e->name);
-	e->max = 50;
+	e->max = 100;
 	e->zi = 0.0;
 	e->zr = 0.0;
 	e->ci = 0.0;
@@ -72,7 +72,7 @@ int	main(int ac, char **av)
 		}
 		setup_env(e);
 		controls();
-		draw_julia(e);
+		draw_mandle(e);
 		mlx_key_hook(e->win, key_hooks, e);
 //		mlx_mouse_hook(e->win, mouse_hooks, e);
 		mlx_loop(e->mlx);

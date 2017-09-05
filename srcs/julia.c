@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 17:51:38 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 20:01:48 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/04 20:50:01 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static	int	calc_iters(t_env *e, int row, int col)
 	re_temp = 0;
 	i_temp = 0;
 	e->cr = -0.7;
-	e->ci = 0.27015;
+	e->ci = 0.17015;
 	i = -1;
 	while (++i < e->max)
 	{
 		re_temp = e->zr;
 		i_temp = e->zi;
 		e->zi = 2 * (i_temp * re_temp) + e->ci;
-		e->zr = SQR(re_temp) - SQR(i_temp) + e->cr;
+		e->zr = SQR(re_temp) - SQR(i_temp) - 0.8 + (e->cr / WINDOW_W);
 		if (SQR(e->zr) + SQR(e->zi) > 4)
 			break ;
 	}
