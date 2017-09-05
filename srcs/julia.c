@@ -18,19 +18,17 @@ static	int	calc_iters(t_env *e, int row, int col)
 	double	i_temp;
 	int		i;
 
-	e->zi = (row - WINDOW_H / 2) / (0.5 * ZOOM * row) + e->ytrans;
-	e->zr =  1.5 * (col - WINDOW_W / 2) / (0.5 * ZOOM * col) + e->xtrans;
-	re_temp = 0;
-	i_temp = 0;
-	e->cr = -0.7;
-	e->ci = 0.17015;
+	e->zi = (row - WINDOW_H / 2) * 4.0 / WINDOW_W * e->scale + e->ytrans;
+	e->zr = (col - WINDOW_W / 2) * 4.0 / WINDOW_W * e->scale + e->xtrans;
+	e->cr = .285;
+	e->ci = 0.01;
 	i = -1;
 	while (++i < e->max)
 	{
 		re_temp = e->zr;
 		i_temp = e->zi;
 		e->zi = 2 * (i_temp * re_temp) + e->ci;
-		e->zr = SQR(re_temp) - SQR(i_temp) - 0.8 + (e->cr / WINDOW_W);
+		e->zr = SQR(re_temp) - SQR(i_temp) + e->cr;
 		if (SQR(e->zr) + SQR(e->zi) > 4)
 			break ;
 	}
