@@ -6,12 +6,11 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 21:20:46 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 21:03:16 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/05 20:44:07 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-
 
 static void	display_opts(void)
 {
@@ -41,16 +40,16 @@ static	void	setup_env(t_env *e)
 	e->zr = 0.0;
 	e->ci = 0.0;
 	e->cr = 0.0;
-	e->xtrans = 0;
-	e->ytrans = 0;
-	e->scale = 0;
+	e->xtrans = 0.0;
+	e->ytrans = 0.0;
+	e->zoom = 1.1;
 }
 
 static	void	controls(void)
 {
 	ft_putendl("CONTROLS:\n");
 	ft_putendl("Zoom In/Out: Mousewheel Up/Down\n");
-	ft_putendl("Increase/Decrease Iteration: Up Arrow/Down Arrow\n");
+	ft_putendl("Increase/Decrease Iteration: Keypad plus/minus\n");
 	ft_putendl("Add/Remove color: z/c\n");
 }
 
@@ -74,7 +73,7 @@ int	main(int ac, char **av)
 		controls();
 		draw_mandle(e);
 		mlx_key_hook(e->win, key_hooks, e);
-//		mlx_mouse_hook(e->win, mouse_hooks, e);
+		mlx_mouse_hook(e->win, mouse_hooks, e);
 		mlx_loop(e->mlx);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 18:06:07 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 19:35:09 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/05 20:47:14 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@
 
 # define WINDOW_H	1000
 # define WINDOW_W	1000
-# define ZOOM		1
-# define SQR(x)		(x * x)
 
-# define K_UP  		126
-# define K_DWN 		125
-# define K_LFT 		123
-# define K_RHT 		124
-# define K_SPCE 	49
-# define K_PLUS 	24
-# define K_MIN 		27
-# define K_ESC 		53
+# define K_PLUS		0X45
+# define K_MINUS   	0X4E
+# define K_ESC		0X35
+
+# define M_LCLICK	0x01
+# define M_RCLICK	0x02
+# define M_UPSCRLL	0x04
+# define M_DWNSCRLL	0x05
 
 # define WHITE		0xf8f8ff
 # define BLACK		0x0
+
+# define SQR(x)		(x * x)
 
 typedef struct			s_env
 {
@@ -51,9 +51,9 @@ typedef struct			s_env
 	double	zi;
 	double	ci;
 	double	cr;
-	int		xtrans;
-	int		ytrans;
-	int		scale;
+	double		xtrans;
+	double		ytrans;
+	double		zoom;
 }						t_env;
 
 typedef	struct 			s_rgb 
@@ -64,7 +64,7 @@ typedef	struct 			s_rgb
 }						t_rgb;
 
 int			key_hooks(int keycode, t_env *e);
-int			my_key_funct(int keycode);
+int			mouse_hooks(int x, int y, int keycode, t_env *e);
 
 void	draw_mandle(t_env *e);
 void	draw_julia(t_env *e);

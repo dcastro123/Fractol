@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 17:51:47 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 20:01:13 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/05 21:54:52 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static	int	calc_iters(t_env *e, int row, int col)
 	e->zr = 0;
 	zrsqr = SQR(e->zr);
 	zisqr = SQR(e->zi);
-	e->cr = (col - WINDOW_W/2.0) * 4.0 / WINDOW_W + e->xtrans;
-	e->ci = (row - WINDOW_H/2.0) * 4.0 / WINDOW_W + e->ytrans;
+	e->cr = (col - WINDOW_W/2.0) * 4.0 / WINDOW_W * e->zoom + e->xtrans;
+	e->ci = (row - WINDOW_H/2.0) * 4.0 / WINDOW_W * e->zoom + e->ytrans;
 	i = -1;
 	while (zrsqr + zisqr <= 4.0 && ++i < e->max)
 	{

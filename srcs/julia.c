@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 17:51:38 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/04 20:50:01 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/05 19:51:38 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static	int	calc_iters(t_env *e, int row, int col)
 	double	i_temp;
 	int		i;
 
-	e->zi = (row - WINDOW_H / 2) * 4.0 / WINDOW_W * e->scale + e->ytrans;
-	e->zr = (col - WINDOW_W / 2) * 4.0 / WINDOW_W * e->scale + e->xtrans;
+	e->zi = (row - WINDOW_H / 2) * 4.0 / WINDOW_W * e->zoom + e->ytrans;
+	e->zr = (col - WINDOW_W / 2) * 4.0 / WINDOW_W * e->zoom + e->xtrans;
 	e->cr = .285;
 	e->ci = 0.01;
 	i = -1;
