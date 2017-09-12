@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 21:20:46 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/05 20:44:07 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/08 21:16:32 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,8 @@ static	void	get_opt(char s, t_env *e)
 	else if (s == '2')
 		e->name = ft_strdup("Mandlebrot");
 	else if (s == '3')
-		e->name = ft_strdup("WIP");
-}
-
-static	void	setup_env(t_env *e)
-{
-	e->mlx = mlx_init();
-	e->win = mlx_new_window(e->mlx, WINDOW_W, WINDOW_H, e->name);
-	e->max = 100;
-	e->zi = 0.0;
-	e->zr = 0.0;
-	e->ci = 0.0;
-	e->cr = 0.0;
-	e->xtrans = 0.0;
-	e->ytrans = 0.0;
-	e->zoom = 1.1;
+		e->name = ft_strdup("error");
+	printf("name store: %s\n", e->name);
 }
 
 static	void	controls(void)
@@ -69,9 +56,8 @@ int	main(int ac, char **av)
 			display_opts();
 			return (0);
 		}
-		setup_env(e);
-		controls();
-		draw_mandle(e);
+		draw_fract(e);
+		controls(); 
 		mlx_key_hook(e->win, key_hooks, e);
 		mlx_mouse_hook(e->win, mouse_hooks, e);
 		mlx_loop(e->mlx);

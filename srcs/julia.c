@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 17:51:38 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/05 19:51:38 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/08 21:14:29 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	draw_julia(t_env *e)
 	int	col;
 
 	row = -1;
-	col = -1;
 	while (++row < WINDOW_H)
 	{
 		col = -1;
@@ -54,9 +53,10 @@ void	draw_julia(t_env *e)
 		{
 			i = calc_iters(e, row, col);
 			if (i == e->max)
-				mlx_pixel_put(e->mlx, e->win, col, row, WHITE);
+				e->data[col + row * e->size / 4] = WHITE;
 			else
-				mlx_pixel_put(e->mlx, e->win, col, row, mlx_get_color_value(e->mlx, (265 * i))); 
+				e->data[col + row * e->size / 4] = 265 * i;
 		}
 	}
+	mlx_put_image_to_window(e->mlx, e->win, e->image, 0, 0);
 }

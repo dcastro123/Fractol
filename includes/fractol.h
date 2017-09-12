@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 18:06:07 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/05 20:47:14 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/08 21:11:39 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,16 @@
 
 typedef struct			s_env
 {
+	char	*image;
+	int		*data;
 	char	*name;
 	int	x;
 	void	*mlx;
 	void	*win;
 	int		max;
+	int		bits;
+	int		size;
+	int		end;
 	double	zr;
 	double	zi;
 	double	ci;
@@ -66,6 +71,7 @@ typedef	struct 			s_rgb
 int			key_hooks(int keycode, t_env *e);
 int			mouse_hooks(int x, int y, int keycode, t_env *e);
 
+void	draw_fract(t_env *e);
 void	draw_mandle(t_env *e);
 void	draw_julia(t_env *e);
 #endif

@@ -6,7 +6,7 @@
 #    By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/21 17:49:07 by dcastro-          #+#    #+#              #
-#    Updated: 2017/09/05 20:01:33 by dcastro-         ###   ########.fr        #
+#    Updated: 2017/09/08 21:11:49 by dcastro-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fractol
 
 CC = gcc -Wall -Werror -Wextra
 
-SRCS = srcs/main.c srcs/hooks.c srcs/mandle.c srcs/julia.c
+SRCS = srcs/main.c srcs/hooks.c srcs/mandle.c srcs/julia.c srcs/draw.c
 
 OBJ = $(SRCS:.c=.o)
 

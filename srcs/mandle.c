@@ -6,11 +6,20 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 17:51:47 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/05 21:54:52 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/08 20:55:35 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
+
+// static	int	get_color(int i)
+// {
+// 	static	int	color_map[50] = {
+// 		0xf8f8ff, 0xfffaf0, 0xfaf0e6, 0xffefd5
+// 		0x80, 0x6a5acd, 0xcd, 0xff, 
+
+// 	}
+// }
 
 static	int	calc_iters(t_env *e, int row, int col)
 {
@@ -45,10 +54,8 @@ void	draw_mandle(t_env *e)
 	int	i;
 	int	row;
 	int	col;
-//	t_rgb	color;
 
 	row = -1;
-	col = -1;
 	while (++row < WINDOW_H)
 	{
 		col = -1;
@@ -56,9 +63,10 @@ void	draw_mandle(t_env *e)
 		{
 			i = calc_iters(e, row, col);
 			if (i == e->max)
-				mlx_pixel_put(e->mlx, e->win, col, row, WHITE);
+				e->data[col + row * e->size / 4] = WHITE;
 			else
-				mlx_pixel_put(e->mlx, e->win, col, row, mlx_get_color_value(e->mlx, (265 * i))); 
+				e->data[col + row * e->size / 4] = 130 * i / 2.5;
 		}
 	}
+	mlx_put_image_to_window(e->mlx, e->win, e->image, 0, 0);
 }
