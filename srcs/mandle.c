@@ -12,15 +12,6 @@
 
 #include "../includes/fractol.h"
 
-// static	int	get_color(int i)
-// {
-// 	static	int	color_map[50] = {
-// 		0xf8f8ff, 0xfffaf0, 0xfaf0e6, 0xffefd5
-// 		0x80, 0x6a5acd, 0xcd, 0xff, 
-
-// 	}
-// }
-
 static	int	calc_iters(t_env *e, int row, int col)
 {
 	double	zrsqr;
