@@ -31,8 +31,12 @@ static	int	calc_iters(t_env *e, int row, int col)
 	e->zr = 0;
 	zrsqr = SQR(e->zr);
 	zisqr = SQR(e->zi);
-	e->cr = (col - WINDOW_W/2.0) * 4.0 / WINDOW_W * e->zoom + e->xtrans;
-	e->ci = (row - WINDOW_H/2.0) * 4.0 / WINDOW_W * e->zoom + e->ytrans;
+// 	e->cr = (col - WINDOW_W/2.0) * 4.0 / WINDOW_W * e->zoom + e->xtrans;
+// 	e->ci = (row - WINDOW_H/2.0) * 4.0 / WINDOW_W * e->zoom + e->ytrans;
+	e->cr = ((4.0 * col / WINDOW_W - 2.0) / e->zoom)
+		+ (e->xtrans / WINDOW_W);
+	e->ci = ((4.0 * row / WINDOW_H - 2.0) / e->zoom)
+		+ (e->ytrans / WINDOW_H);
 	i = -1;
 	while (zrsqr + zisqr <= 4.0 && ++i < e->max)
 	{
