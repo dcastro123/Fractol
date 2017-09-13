@@ -6,38 +6,27 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 21:20:46 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/08 21:16:32 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/12 22:23:52 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-static void	display_opts(void)
+static	void	setup_env(t_env *e)
 {
-	ft_putendl("Usage: ./fractol [option number]");
-	ft_putstr("Valid Options:\n\
-		1: Julia\n\
-		2: Mandlebrot\n\
-		3. WIP\n");
-}
-
-static	void	get_opt(char s, t_env *e)
-{
-	if (s == '1')
-		e->name = ft_strdup("Julia");
-	else if (s == '2')
-		e->name = ft_strdup("Mandlebrot");
-	else if (s == '3')
-		e->name = ft_strdup("error");
-	printf("name store: %s\n", e->name);
-}
-
-static	void	controls(void)
-{
-	ft_putendl("CONTROLS:\n");
-	ft_putendl("Zoom In/Out: Mousewheel Up/Down\n");
-	ft_putendl("Increase/Decrease Iteration: Keypad plus/minus\n");
-	ft_putendl("Add/Remove color: z/c\n");
+	e->mlx = mlx_init();
+	e->win = mlx_new_window(e->mlx, WINDOW_W, WINDOW_H, "FRACTOL");
+	e->image = mlx_new_image(e->mlx, WINDOW_W, WINDOW_H);
+	e->data = (int*)mlx_get_data_addr(e->image, &e->bits, &e->size, &e->end);
+	e->max = 64;
+	e->zi = 0.0;
+	e->zr = 0.0;
+	e->ci = 0.0;
+	e->cr = 0.0; 
+	e->flag = 0;
+	e->xtrans = 0.0;
+	e->ytrans = 0.0;
+	e->zoom = 1.0;
 }
 
 int	main(int ac, char **av)
@@ -51,15 +40,17 @@ int	main(int ac, char **av)
 		if (!(e = (t_env*)ft_memalloc(sizeof(t_env))))
 			return (0);
 		get_opt(av[1][0], e);
-		if (!(e->name))
+		if (!(e->choice))
 		{
 			display_opts();
 			return (0);
 		}
+		setup_env(e);
 		draw_fract(e);
 		controls(); 
 		mlx_key_hook(e->win, key_hooks, e);
 		mlx_mouse_hook(e->win, mouse_hooks, e);
+		mlx_hook(e->win, 6, 0, julia_mouse_hook, e);
 		mlx_loop(e->mlx);
 	}
 	return (0);
