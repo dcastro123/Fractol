@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 21:20:46 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/12 22:23:52 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/13 20:31:06 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static	void	setup_env(t_env *e)
 	e->zi = 0.0;
 	e->zr = 0.0;
 	e->ci = 0.0;
-	e->cr = 0.0; 
+	e->cr = 0.0;
 	e->flag = 0;
 	e->xtrans = 0.0;
 	e->ytrans = 0.0;
 	e->zoom = 1.0;
 }
 
-int	main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_env *e;
 
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 		}
 		setup_env(e);
 		draw_fract(e);
-		controls(); 
+		controls();
 		mlx_key_hook(e->win, key_hooks, e);
 		mlx_mouse_hook(e->win, mouse_hooks, e);
 		mlx_hook(e->win, 6, 0, julia_mouse_hook, e);

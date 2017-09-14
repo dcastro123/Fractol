@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandle.c                                           :+:      :+:    :+:   */
+/*   clover.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/21 17:51:47 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/13 23:08:48 by dcastro-         ###   ########.fr       */
+/*   Created: 2017/09/13 21:40:52 by dcastro-          #+#    #+#             */
+/*   Updated: 2017/09/13 22:48:40 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,26 @@
 
 static	int	calc_iters(t_env *e, int row, int col)
 {
-	double	zrsqr;
-	double	zisqr;
-	double	temp;
+	double	re_temp;
+	double	i_temp;
 	int		i;
 
-	e->zi = 0;
-	e->zr = 0;
-	zrsqr = SQR(e->zr);
-	zisqr = SQR(e->zi);
-	e->cr = (col - WIN_WSPLIT) * 4.0 / WINDOW_W * e->zoom + e->xtrans;
-	e->ci = (row - WIN_HSPLIT) * 4.0 / WINDOW_W * e->zoom + e->ytrans;
+	e->zi = (row - WIN_HSPLIT) / (0.5 * e->zoom * WINDOW_H) + e->ytrans;
+	e->zr = (col - WIN_WSPLIT) / (0.5 * e->zoom * WINDOW_W) + e->xtrans;
 	i = -1;
-	while (zrsqr + zisqr <= 4.0 && ++i < e->max)
+	while (++i < e->max)
 	{
-		temp = zrsqr - zisqr + e->cr;
-		e->zi = 2 * (e->zr * e->zi) + e->ci;
-		e->zr = temp;
-		zrsqr = SQR(e->zr);
-		zisqr = SQR(e->zi);
+		re_temp = e->zr;
+		i_temp = e->zi;
+		e->zi = 2 * (i_temp * re_temp) + (e->mouse_y / WINDOW_H);
+		e->zr = SQR(re_temp) - SQR(i_temp) + (e->mouse_x / WINDOW_W);
+		if (SQR(e->zr) + SQR(e->zi) > 4)
+			break ;
 	}
 	return (i);
 }
 
-void		draw_mandel(t_env *e)
+void	draw_clover(t_env *e)
 {
 	int	i;
 	int	row;
@@ -47,7 +43,7 @@ void		draw_mandel(t_env *e)
 	while (++row < WINDOW_H)
 	{
 		col = -1;
-		while (++col < WINDOW_W)
+		while(++col < WINDOW_W)
 		{
 			i = calc_iters(e, row, col);
 			if (i == e->max)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandle.c                                           :+:      :+:    :+:   */
+/*   burningship.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/21 17:51:47 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/13 23:08:48 by dcastro-         ###   ########.fr       */
+/*   Created: 2017/09/13 19:16:01 by dcastro-          #+#    #+#             */
+/*   Updated: 2017/09/13 23:05:01 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ static	int	calc_iters(t_env *e, int row, int col)
 	i = -1;
 	while (zrsqr + zisqr <= 4.0 && ++i < e->max)
 	{
-		temp = zrsqr - zisqr + e->cr;
-		e->zi = 2 * (e->zr * e->zi) + e->ci;
+		temp = fabs(zrsqr - zisqr + e->cr);
+		// e->zi = (e->zr + e->zi) * (e->zr + e->zi) - zrsqr - zisqr;
+		// e->zi += e->ci;
+		e->zi = fabs(2 * (e->zr * e->zi) + e->ci);
+		// e->zr = (zrsqr - zisqr) + e->cr;
 		e->zr = temp;
 		zrsqr = SQR(e->zr);
 		zisqr = SQR(e->zi);
@@ -37,7 +40,7 @@ static	int	calc_iters(t_env *e, int row, int col)
 	return (i);
 }
 
-void		draw_mandel(t_env *e)
+void		draw_ship(t_env *e)
 {
 	int	i;
 	int	row;
