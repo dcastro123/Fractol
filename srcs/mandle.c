@@ -6,55 +6,52 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 17:51:47 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/13 23:08:48 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/15 22:47:33 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-static	int	calc_iters(t_env *e, int row, int col)
+static	int	calc_iters(t_env *e, int row, int col, double temp)
 {
-	double	zrsqr;
-	double	zisqr;
-	double	temp;
+	double	y;
+	double	x;
+	double	cr;
+	double	ci;
 	int		i;
 
-	e->zi = 0;
-	e->zr = 0;
-	zrsqr = SQR(e->zr);
-	zisqr = SQR(e->zi);
-	e->cr = (col - WIN_WSPLIT) * 4.0 / WINDOW_W * e->zoom + e->xtrans;
-	e->ci = (row - WIN_HSPLIT) * 4.0 / WINDOW_W * e->zoom + e->ytrans;
+	y = 0;
+	x = 0;
+	cr = 2.0 * (col - WIN_WSPLIT) / (0.5 * e->zoom * WINDOW_W) + e->x_off;
+	ci = 2.0 * (row - WIN_HSPLIT) / (0.5 * e->zoom * WINDOW_H) + e->y_off;
 	i = -1;
-	while (zrsqr + zisqr <= 4.0 && ++i < e->max)
+	while (SQR(x) + SQR(y) <= 4.0 && ++i < e->max)
 	{
-		temp = zrsqr - zisqr + e->cr;
-		e->zi = 2 * (e->zr * e->zi) + e->ci;
-		e->zr = temp;
-		zrsqr = SQR(e->zr);
-		zisqr = SQR(e->zi);
+		temp = SQR(x) - SQR(y) + cr;
+		y = 2 * (x * y) + ci;
+		x = temp;
 	}
 	return (i);
 }
 
-void		draw_mandel(t_env *e)
+void		draw_mandel(t_env *e, int row, int stop)
 {
-	int	i;
-	int	row;
-	int	col;
+	int		i;
+	int		col;
+	double	temp;
 
-	row = -1;
-	while (++row < WINDOW_H)
+	temp = 0;
+	while (row < stop)
 	{
 		col = -1;
 		while (++col < WINDOW_W)
 		{
-			i = calc_iters(e, row, col);
+			i = calc_iters(e, row, col, temp);
 			if (i == e->max)
 				e->data[col + row * e->size / 4] = BLACK;
 			else
 				e->data[col + row * e->size / 4] = e->color_arr[i % 64];
 		}
+		row++;
 	}
-	mlx_put_image_to_window(e->mlx, e->win, e->image, 0, 0);
 }

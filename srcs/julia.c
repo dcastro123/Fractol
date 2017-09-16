@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/21 17:51:38 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/13 21:42:27 by dcastro-         ###   ########.fr       */
+/*   Created: 2017/09/15 22:14:58 by dcastro-          #+#    #+#             */
+/*   Updated: 2017/09/15 22:47:26 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,29 @@ static	int	calc_iters(t_env *e, int row, int col)
 {
 	double	re_temp;
 	double	i_temp;
+	double	y;
+	double	x;
 	int		i;
 
-	e->zi = (row - WIN_HSPLIT) / (0.5 * e->zoom * WINDOW_H) + e->ytrans;
-	e->zr = (col - WIN_WSPLIT) / (0.5 * e->zoom * WINDOW_W) + e->xtrans;
+	y = 2.0 * (row - WIN_HSPLIT) / (0.5 * e->zoom * WINDOW_H) + e->y_off;
+	x = 2.0 * (col - WIN_WSPLIT) / (0.5 * e->zoom * WINDOW_W) + e->x_off;
 	i = -1;
-	while (++i < e->max)
+	while (++i < e->max && SQR(x) + SQR(y) <= 4.0)
 	{
-		re_temp = e->zr;
-		i_temp = e->zi;
-		e->zi = 2 * (i_temp * re_temp) + (e->mouse_y / WINDOW_H);
-		e->zr = SQR(re_temp) - SQR(i_temp) + (e->mouse_x / WINDOW_W);
-		if (SQR(e->zr) + SQR(e->zi) > 4)
-			break ;
+		re_temp = x;
+		i_temp = y;
+		x = SQR(re_temp) - SQR(i_temp) + (e->mouse_x * 4.0 / WINDOW_W - 2.0);
+		y = 2 * (i_temp * re_temp) + (e->mouse_y * 4.0 / WINDOW_H - 2.0);
 	}
 	return (i);
 }
 
-void		draw_julia(t_env *e)
+void		draw_julia(t_env *e, int row, int stop)
 {
 	int	i;
-	int	row;
 	int	col;
 
-	row = -1;
-	while (++row < WINDOW_H)
+	while (row < stop)
 	{
 		col = -1;
 		while (++col < WINDOW_W)
@@ -51,6 +49,6 @@ void		draw_julia(t_env *e)
 			else
 				e->data[col + row * e->size / 4] = e->color_arr[i % 64];
 		}
+		row++;
 	}
-	mlx_put_image_to_window(e->mlx, e->win, e->image, 0, 0);
 }

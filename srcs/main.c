@@ -6,7 +6,7 @@
 /*   By: dcastro- <dcastro-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 21:20:46 by dcastro-          #+#    #+#             */
-/*   Updated: 2017/09/13 20:31:06 by dcastro-         ###   ########.fr       */
+/*   Updated: 2017/09/15 22:37:34 by dcastro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,27 @@
 
 static	void	setup_env(t_env *e)
 {
+	e->max = 64;
+	e->flag = 0;
+	e->y_off = 0.0;
+	e->x_off = 0.0;
+	e->zoom = 1.0;
+	set_color(e);
+}
+
+void			run_frac(t_env *e)
+{
+	e->choice == 0 ? exit(0) : start_pthread(e);
+	mlx_put_image_to_window(e->mlx, e->win, e->image, 0, 0);
+}
+
+static	void	init_win(t_env *e)
+{
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WINDOW_W, WINDOW_H, "FRACTOL");
 	e->image = mlx_new_image(e->mlx, WINDOW_W, WINDOW_H);
 	e->data = (int*)mlx_get_data_addr(e->image, &e->bits, &e->size, &e->end);
-	e->max = 64;
-	e->zi = 0.0;
-	e->zr = 0.0;
-	e->ci = 0.0;
-	e->cr = 0.0;
-	e->flag = 0;
-	e->xtrans = 0.0;
-	e->ytrans = 0.0;
-	e->zoom = 1.0;
+	setup_env(e);
 }
 
 int				main(int ac, char **av)
@@ -41,12 +49,9 @@ int				main(int ac, char **av)
 			return (0);
 		get_opt(av[1][0], e);
 		if (!(e->choice))
-		{
-			display_opts();
-			return (0);
-		}
-		setup_env(e);
-		draw_fract(e);
+			error_opts();
+		init_win(e);
+		run_frac(e);
 		controls();
 		mlx_key_hook(e->win, key_hooks, e);
 		mlx_mouse_hook(e->win, mouse_hooks, e);
